@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang= "pl" xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <meta charset="utf-8" />
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />   <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script> 
+        <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+        <title>Dziennik internetowy</title>
+        <style>
+            .footer {
+                position: fixed;
+                margin-top: 30px;
+                height: 20px;
+                width: 100%;
+                background-color:  darkgrey;
+                justify-content:center;
+                align-items:center;
+
+            }
+            .text-danger{
+                color: red;
+                font-size: 8px;
+            }
+            table{
+                border-collapse: collapse;
+            }
+            .nav > li {
+                display: inline;
+                background: limegreen;
+            }
+            a {
+                text-decoration: none;
+                font-size: 10px;
+            }
+            th,td {
+                border: solid 1px black;
+                padding: 5px;
+            }
+            body {
+                text-align: center;
+            }
+            form {
+                display: inline-block;
+            }
+            input{
+                margin-top: 4px;
+                margin-bottom: 2px;
+                padding: 10px;
+                width: 150px;
+            }
+            .btn {
+                border: none;
+                background-color: inherit;
+                padding: 8px 28px;
+                margin-top: 5px;
+                font-size: 12px;
+                cursor: pointer;
+                display: inline-block;
+                border: 1px solid black;
+                width: 170px
+            }
+            .btnsml{
+                border: none;
+                background-color: inherit;
+                padding: 8px 28px;
+                font-size: 8px;
+                cursor: pointer;
+                display: inline-block;
+            }
+            .btn:hover .btnsml:hover{
+                color: blue;
+            }
+        </style>
+    </head> 
+    <body>
+        <div th:fragment="navigationPanel" >
+            <ul class="nav">
+                <li sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/register}">Zarejestruj się</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/profile}">Wyświetl swoje konto</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/users}">Wyświetl użytkowników</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/edit}">Edytuj konto</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/delete}">Usuń konto</a></li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/login}">Zaloguj się</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}">Wyloguj się</a></li>
+            </ul>
+        </div>
+        
+    </body>
+</html> 

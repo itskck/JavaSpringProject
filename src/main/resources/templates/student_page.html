@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang= "pl" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="layout :: head">
+    </head>
+    <body onload="get()">
+
+        <h1 th:text="'Witaj ' +${user.name} + ' ' + ${user.surname}"></h1>
+        <div id="tabelaStudentow"></div>
+        <div id="komentarzeStudentow"></div>
+        <script type="text/javascript" charset="UTF-8" src="/skrypty.js"></script> 
+        <script th:inline="javascript">
+        function get() {
+            console.log('eee');
+            console.log([[${studentId}]]);
+            fetch("http://localhost:8082/students/" + [[${studentId}]]).then((response) => {
+                if (response.status !== 200) {
+                    return Promise.reject('Coś poszło nie tak!');
+                }
+                return response.json();
+            })
+                    .then((data) => {
+                        var name = data.name;
+                        var surname = data.surname;
+                      
+                        console.log(name);
+                        console.log(surname);
+                        getAllStudents(true, name, surname);
+                        
+
+                    }).then((data)=> {
+                        var idd = [[${studentId}]];
+                        getKomentarze(idd,false,true);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            
+
+        }
+        </script>
+
+
+    </body>
+</html> 

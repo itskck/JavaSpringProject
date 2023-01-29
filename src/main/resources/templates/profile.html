@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang= "pl" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="layout :: head">
+       
+    </head>
+    <body onload="get()">
+        
+        <h1 th:text="'Witaj ' +${user.name} + ' ' + ${user.surname}"></h1>
+        <div id="tabelaStudentow"></div>
+          <div id="komentarzeStudentow"></div>
+        <script th:inline="javascript">
+            function get(){
+                var name = [[${user.name}]];
+                var surname = [[${user.surname}]];
+                getAllStudents('[[${user.isStudent}]]'==='true',name,surname);
+                getKomentarze('[[${user.id}]]','[[${user.isStudent}]]'==='true','[[${user.isStudent}]]'==='true')
+                console.log('[[${user.isStudent}]]');
+            }
+        </script>
+        <script type="text/javascript" src="skrypty.js"></script> 
+        <a th:href="@{/logout}">Wyloguj się</a>
+    </body>
+</html> 
